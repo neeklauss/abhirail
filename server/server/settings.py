@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from mongoengine import connect
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,12 +74,12 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -121,3 +122,62 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# myproject/settings.py
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'users',  # Replace with your MongoDB database name
+#         'ENFORCE_SCHEMA': False,
+#         'CLIENT': {
+#             'host': 'mongodb+srv://abhinesh436:8KV1KJbUWlzRpuag@cluster0.nx3im.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+#             'username': 'abhinesh436',
+#             'password': '8KV1KJbUWlzRpuag',
+#             'authMechanism': 'SCRAM-SHA-1', # This might vary depending on your MongoDB setup
+#             'authSource': 'admin', 
+#         }
+#     }
+# }
+
+# Add this to prevent Django from looking for migrations for your app using MongoEngine
+SILENCED_SYSTEM_CHECKS = ['models.E008']  # Suppresses migration warnings
+
+# MongoDB connection with mongoengine
+connect(
+    db='users',  # Replace with your MongoDB database name
+    username='abhinesh436',
+    password='8KV1KJbUWlzRpuag',
+    host='mongodb+srv://cluster0.nx3im.mongodb.net',
+    authentication_source='admin',
+    authentication_mechanism='SCRAM-SHA-1',
+    ssl=True
+)
+
+# Ensure that the following apps are in your INSTALLED_APPS section
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'signup',
+    'corsheaders',
+]
+
+# Default Django middleware
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True  # Or configure allowed origins
+
