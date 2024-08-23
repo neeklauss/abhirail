@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<SignupPage />} />
         {/* Add other routes as necessary */}
       </Routes>
     </Router>

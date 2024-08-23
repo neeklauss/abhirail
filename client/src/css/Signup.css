@@ -1,50 +1,101 @@
+/* Signup.css */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('../assets/rail2.jpg') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
 .signup-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px; /* Further reduced padding */
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  width: 320px; /* Same reduced width */
+  color: white;
+}
+
+.signup-container h2 {
+  text-align: center;
+  font-size: 24px; /* Slightly smaller heading */
+  font-weight: 600;
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+.signup-container form div {
+  margin-bottom: 12px; /* Reduced margin between form elements */
+}
+
+.signup-container label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px; /* Slightly reduced label margin */
+}
+
+.signup-container input {
+  width: 100%;
+  padding: 8px; /* Further reduced padding for inputs */
+  border: none;
+  border-radius: 25px;
+  font-size: 14px; /* Same font size */
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.signup-container input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.signup-container input:focus {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.signup-container button {
+  width: 100%;
+  padding: 10px; /* Kept the same reduced padding */
+  border: none;
+  border-radius: 25px;
+  background-color: #f39c12;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signup-container button:hover {
+  background-color: #e67e22;
+}
+
+.signup-container p {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 12px; /* Reduced margin at the bottom */
+}
+
+.signup-container .login-link {
+  color: #f39c12;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.signup-container .login-link:hover {
+  color: #e67e22;
+}
+
+@media (max-width: 480px) {
+  .signup-container {
+    width: 85%; /* Adjusted for mobile */
+    padding: 18px; /* Reduced padding for mobile */
   }
-  
+
   .signup-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    font-size: 22px; /* Same smaller heading on mobile */
   }
-  
-  .signup-container form div {
-    margin-bottom: 15px;
-  }
-  
-  .signup-container label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .signup-container input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
-  .signup-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .signup-container p {
-    text-align: center;
-    margin-top: 15px;
-  }
-  
-  .signup-container .login-link {
-    color: #007bff;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  
+}
