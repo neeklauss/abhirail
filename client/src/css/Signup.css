@@ -38,7 +38,7 @@ body {
 }
 
 .signup-container input {
-  width: 100%;
+  width: 93%;
   padding: 8px; /* Further reduced padding for inputs */
   border: none;
   border-radius: 25px;
