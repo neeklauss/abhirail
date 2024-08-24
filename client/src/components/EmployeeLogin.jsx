@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import '../css/Login.css'; // Import the CSS file
+import '../css/EmployeeLogin.css'; // Import the CSS file
 
-const LoginPage = () => {
+const EmployeeLogin = () => {
   const [formData, setFormData] = useState({
-    email: '',
+    employeeId: '',
     password: '',
   });
+
 
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
@@ -22,22 +23,18 @@ const LoginPage = () => {
     });
   };
 
-  const handleForgotPasswordChange = (e) => {
-    setForgotPasswordEmail(e.target.value);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     // Simple form validation
-    if (!formData.email || !formData.password) {
+    if (!formData.employeeId || !formData.password) {
       alert('Please fill in all fields');
       return;
     }
   
     try {
-      // Make an API call to your backend login endpoint
-      const response = await fetch('http://127.0.0.1:8000/login/', {
+      // Make an API call to your backend employee login endpoint
+      const response = await fetch('http://127.0.0.1:8000/employee-login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,27 +45,26 @@ const LoginPage = () => {
       const data = await response.json();
   
       if (response.ok) {
-        // Assuming the API returns a token and user info
-        const { token, user } = data;
+        // Assuming the API returns a token and employee info
+        const { token, employee } = data;
   
         // Store the token in localStorage (or any other secure storage)
-        localStorage.setItem('authToken', token);
+        localStorage.setItem('employeeAuthToken', token);
   
-        // Optionally store user info in localStorage
-        localStorage.setItem('user', JSON.stringify(user));
+        // Optionally store employee info in localStorage
+        localStorage.setItem('employee', JSON.stringify(employee));
   
-        // Navigate to the dashboard or home page
-        navigate('/dashboard');
+        // Navigate to the employee dashboard or home page
+        navigate('/employee-dashboard');
       } else {
         // Handle errors (e.g., invalid credentials)
-        alert(data.message || 'Login failed. Please try again.');
+        alert(data.message || 'Employee login failed. Please try again.');
       }
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error('Error during employee login:', error);
       alert('An error occurred. Please try again later.');
     }
   };
-  
 
   const handleForgotPasswordSubmit = (e) => {
     e.preventDefault();
@@ -77,51 +73,54 @@ const LoginPage = () => {
     setShowForgotPassword(false); // Close the pop-up after submission
   };
 
-  const handleSignupRedirect = () => {
-    navigate('/signup');
-  };
-  const handleEmployeeLoginRedirect = () => {
-    navigate('/employee-login');
+  const handleForgotPasswordChange = (e) => {
+    setForgotPasswordEmail(e.target.value);
   };
 
-  // Render the forgot password popup using React Portal
-  const renderForgotPasswordPopup = () => (
-    ReactDOM.createPortal(
-      <div className="forgot-password-popup">
-        <div className="forgot-password-container">
-          <h2>Reset Password</h2>
-          <form onSubmit={handleForgotPasswordSubmit}>
-            <div>
-              <label>Email:</label>
-              <input
-                type="email"
-                name="forgotPasswordEmail"
-                value={forgotPasswordEmail}
-                onChange={handleForgotPasswordChange}
-                required
-              />
+  const handleEmployeeLoginRedirect = () => {
+    navigate('/login');
+  };
+
+
+
+    // Render the forgot password popup using React Portal
+    const renderForgotPasswordPopup = () => (
+        ReactDOM.createPortal(
+          <div className="forgot-password-popup">
+            <div className="forgot-password-container">
+              <h2>Reset Password</h2>
+              <form onSubmit={handleForgotPasswordSubmit}>
+                <div>
+                  <label>Email:</label>
+                  <input
+                    type="email"
+                    name="forgotPasswordEmail"
+                    value={forgotPasswordEmail}
+                    onChange={handleForgotPasswordChange}
+                    required
+                  />
+                </div>
+                <button type="submit">Send Link</button>
+              </form>
+              <button className="close-popup" onClick={() => setShowForgotPassword(false)}>
+                Close
+              </button>
             </div>
-            <button type="submit">Send Link</button>
-          </form>
-          <button className="close-popup" onClick={() => setShowForgotPassword(false)}>
-            Close
-          </button>
-        </div>
-      </div>,
-      document.getElementById('portal-root') // The DOM node where the portal will be rendered
-    )
-  );
+          </div>,
+          document.getElementById('portal-root') // The DOM node where the portal will be rendered
+        )
+      );
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
+    <div className="employee-login-container">
+      <h2>Employee Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
+          <label>Employee ID:</label>
           <input
-            type="email"
-            name="email"
-            value={formData.email}
+            type="text"
+            name="employeeId"
+            value={formData.employeeId}
             onChange={handleChange}
             required
           />
@@ -144,20 +143,14 @@ const LoginPage = () => {
         </span>
       </p>
       <p>
-        Not registered yet?{' '}
-        <span className="signup-link" onClick={handleSignupRedirect}>
-          Sign up here
-        </span>
-      </p>
-      <p>
         <span className="employee-login-link" onClick={handleEmployeeLoginRedirect}>
-          Employee Login
+            Back
         </span>
       </p>
-
       {showForgotPassword && renderForgotPasswordPopup()}
     </div>
+    
   );
 };
 
-export default LoginPage;
+export default EmployeeLogin;

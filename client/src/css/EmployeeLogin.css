@@ -1,0 +1,101 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('../assets/pxfuel.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    color: #fff;
+  }
+  
+  .employee-login-container {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    width: 100%; /* Allow the container to take full width initially */
+    max-width: 350px; /* Set a max-width to avoid stretching on large screens */
+    color: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+  }
+  
+  .employee-login-container h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .employee-login-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Ensure form takes full width of the container */
+  }
+  
+  .employee-login-container form div {
+    margin-bottom: 12px;
+    width: 100%; /* Ensure each form element takes full width */
+  }
+  
+  .employee-login-container label {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  
+  .employee-login-container input {
+    width: 93%;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    outline: none;
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .employee-login-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .employee-login-container input:focus {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.02);
+  }
+  
+  .employee-login-container button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: #f39c12;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .employee-login-container button:hover {
+    background-color: #e67e22;
+    transform: scale(1.05);
+  }
+
+  .forgot-password-link{
+    color: #f39c12;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s;
+     }
+  
+  @media (max-width: 480px) {
+    .employee-login-container {
+      width: 90%; /* Increased width for smaller screens */
+      padding: 18px;
+    }
+  }
+  
